@@ -4,6 +4,4 @@ Needed to slice your spritesheets? Look no further, because I made a simple tool
 
 ## Setup
 
-- Clone the repo
-- if you don't already, install python https://www.python.org/downloads/
-- if it gives you an error, try ```$ pip install pillow```
+To download, go to the Releases tab, to the right and download the zip file under mac or windows
