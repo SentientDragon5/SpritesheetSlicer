@@ -3,10 +3,11 @@ import Slicer
 from tkinter import Tk, filedialog, StringVar, IntVar, BooleanVar
 from tkinter.ttk import Button, LabelFrame, Label, Entry, Frame, Checkbutton
 from tkinter.messagebox import showerror
+import subprocess, sys
 
 class ImageEditorGUI:
   def __select_files(self):
-    self.filenames = filedialog.askopenfilenames(title="Select Images", filetypes=[("Image Files", "*.jpg;*.png")])
+    self.filenames = filedialog.askopenfilenames(title="Select Images", filetypes=[("Image Files", "*.png")])
     self.file_list.set("\n".join(self.filenames))
 
   def __submit(self):
@@ -36,10 +37,11 @@ class ImageEditorGUI:
         for tuple in enumerate(patches):
           print(tuple)
           patch,x,y = tuple[1]
-          patch.save(f"{folder_path}\\{file_name}_{x}_{y}.png")
+          patch.save(f"{folder_path}/{file_name}_{x}_{y}.png")
 
         if(self.open_folder_var.get()):
-          os.startfile(folder_path)
+          opener = "open" if sys.platform == "darwin" else "xdg-open"
+          subprocess.call([opener, folder_path])
         print(f"Created folder: {folder_path}")
       except OSError as e:
         showerror("Error", f"Failed to create folder: {folder_path}\n{e}")
